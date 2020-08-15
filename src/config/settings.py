@@ -25,6 +25,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cases.apps.CasesConfig',
+    'donations.apps.DonationsConfig',
+    'mailings.apps.MailingsConfig',
 ]
 
 MIDDLEWARE = [
@@ -110,3 +113,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+MAILCHIMP_USERNAME = os.getenv('MAILCHIMP_USERNAME')
+
+MAILCHIMP_API_KEY = os.getenv('MAILCHIMP_API_KEY') 
+
+MAILCHIMP_COMMON_LIST_ID = 'Jlkok4GJlgi4liL#lg232'
+
+MAILCHIMP_CASE_LIST_ID = 'Jlkok4GJlgi4liL#lg232'
+
