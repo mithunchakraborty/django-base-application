@@ -1,9 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.conf import settings
-from .models import *
-from cases.models import Case
-from .services.mailchimp import add_mailchimp_email_with_tag
+from .services.services import * 
 
 
 def add_to_common_list_view(request):
@@ -15,13 +13,7 @@ def add_to_common_list_view(request):
     if not email:
         return JsonResponse({'success': False, 'message': 'Передайте email'})
 
-    add_mailchimp_email_with_tag(
-        audience_id=settings.MAILCHIMP_COMMON_LIST_ID,
-        email=email,
-        tag='COMMON TAG'
-    )
-
-    CommonMailingList.objects.get_or_create(email=email)
+    add_email_to_common_mailchimp_list(email=email)
 
     return JsonResponse({'success': True}) 
 
@@ -44,13 +36,7 @@ def add_to_case_list_view(request):
 
     case_tag = f'Case {case.name}'
 
-    add_mailchimp_email_with_tag(
-        audience_id=settings.MAILCHIMP_CASE_LIST_ID,
-        email=email,
-        tag=case_id
-    )
-
-    CaseMailingList.objects.get_or_create(email=email, case=case)
+    add_email_to_case_mailchimp_list(email=email, case_id=case_id)
 
     return JsonResponse({'success': True}) 
 

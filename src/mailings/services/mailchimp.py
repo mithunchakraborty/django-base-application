@@ -3,12 +3,12 @@ from typing import Optional
 from django.conf import settings
 
 
-def add_mailchimp_email_with_tag(audience_id:str, email:str, tag: str) -> None:
+def add_mailchimp_email_with_tag(audience_name:str, email:str, tag: str) -> None:
     """
-    Добавляет в Mailchimp email в аудиторию с идентификатором audience_id
+    Добавляет в Mailchimp email в аудиторию с названием audience_name 
     """
     _add_email_to_mailchimp_audience(
-        audience_id=audience_id,
+        audience_id=settings.MAILCHIMP_AUDIENCES.get(audience_name),
         email=email
     )
 
