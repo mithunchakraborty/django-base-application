@@ -1,7 +1,14 @@
+import logging
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.conf import settings
 from .services.services import * 
+from core.views import base_view, BaseView
+
+
+# Открыть логгер можно командой tail -f src/log.log
+# tail следит за обновлениями файла
+logger = logging.getLogger(__name__)
 
 
 def add_to_common_list_view(request):
@@ -40,4 +47,16 @@ def add_to_case_list_view(request):
 
     return JsonResponse({'success': True}) 
 
+
+@base_view
+def tmp_view(request):
+    logger.warning('Hello!')
+    logger.info('Inf')
+    logger.error('err')
+    return JsonResponse({'success': True})
+
+
+class MyView(BaseView):
+    def get(self, request):
+        return {'success': True}
 

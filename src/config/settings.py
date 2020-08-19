@@ -58,6 +58,32 @@ TEMPLATES = [
     },
 ]
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'baseformatter': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        }
+    },
+    'handlers': {
+        'file': {
+            'level': 'WARNING',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'log.log'),
+            'formatter': 'baseformatter'
+        }
+    },
+    'loggers': {
+        'mailings': {
+            'handlers': ['file'],
+            'level': 'WARNING',
+            'propagate': True
+        }
+    }
+}
+
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
